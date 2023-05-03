@@ -1,0 +1,59 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "typescript",
+    "eslint:recommended",
+    "xo",
+    "plugin:import/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "env": {
+    "es2022": true,
+    "jest": true,
+    "node": true
+  },
+  "plugins": ["@typescript-eslint", "unicorn", "prettier", "jest"],
+  "ignorePatterns": ["public", "*.d.ts", "cypress"],
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "always"
+      }
+    ],
+    "import/no-unresolved": ["error", { "ignore": ["\\.js"] }],
+    "no-nested-ternary": "error",
+    "no-multiple-empty-lines": "error",
+    "object-curly-spacing": ["error", "always"],
+    "prettier/prettier": "off",
+    "arrow-body-style": ["error", "as-needed"],
+    "@typescript-eslint/consistent-type-imports": ["error", { "prefer": "type-imports" }]
+  },
+  "overrides": [
+    {
+      "files": "*.test.ts",
+      "rules": {
+        "import/no-unresolved": "off",
+        "import/no-unassigned-import": "off",
+        "@typescript-eslint/ban-ts-comment": "off"
+      }
+    },
+    {
+      "files": "types.ts",
+      "rules": {
+        "no-unused-vars": "off"
+      }
+    },
+    {
+      "files": "cypress/e2e/*.ts",
+      "rules": {
+        "new-cap": "off"
+      }
+    }
+  ]
+}
