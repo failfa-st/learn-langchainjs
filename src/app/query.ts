@@ -1,44 +1,66 @@
 import chalk from "chalk";
-import { VectorDBQAChain } from "langchain/chains";
+import { LLMChain, StuffDocumentsChain, VectorDBQAChain } from "langchain/chains";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
-import { OpenAI } from "langchain/llms/openai";
+import { OpenAI, OpenAIChat } from "langchain/llms/openai";
+import {
+	ChatPromptTemplate,
+	SystemMessagePromptTemplate,
+	MessagesPlaceholder,
+	HumanMessagePromptTemplate,
+} from "langchain/prompts";
 import { HNSWLib } from "langchain/vectorstores/hnswlib";
 
-import { langchainVectorstoreDirectory } from "../constants.ts";
+import { gptModelName, vectoreStoreLangchainRepo } from "../constants.ts";
 
 export async function query(question: string): Promise<any> {
-	const model = new OpenAI({ modelName: "gpt-3.5-turbo", maxRetries: 0, temperature: 0.2 });
+	const chat = new OpenAIChat({ modelName: gptModelName, maxRetries: 0, temperature: 0.2 });
 
 	const embedding = new OpenAIEmbeddings({
 		modelName: "text-embedding-ada-002",
 		maxRetries: 0,
 	});
 
-	// Load the vector store from a directory
-	const vectorStore = await HNSWLib.load(langchainVectorstoreDirectory, embedding);
+	// Load the "vectorStore" from a directory
+	const vectorStore = await HNSWLib.load(vectoreStoreLangchainRepo, embedding);
 
-	const chain = VectorDBQAChain.fromLLM(model, vectorStore, {
-		// Provide 4 results from the vectorStore that are the most similar
-		// to the provided query
-		k: 4,
+	// Define the templates for the SystemMessage (how the AI interacts with us)
+	// & HumanMessage (the way we interact with the AI)
+	const chatPrompt = ChatPromptTemplate.fromPromptMessages([
+		SystemMessagePromptTemplate.fromTemplate(`
+You are a JavaScript developer and know everything about the langchainjs library.
+You use the following information to answer questions and if you can't do that, don't make up an answer:
 
-		// Provide the documents from the vectorStore that where found
-		// with the provided query
-		returnSourceDocuments: true,
-	});
+{context}
+`),
+		new MessagesPlaceholder("history"),
+		HumanMessagePromptTemplate.fromTemplate("{question}"),
+	]);
 
-	const prompt = `
-        LANGCHAINJS QUESTION: "${question}"
-        ALWAYS return CODE EXAMPLES if possible
-    `;
+	// Get 4 "docs" that are most similar to the "question" out of the "vectorStore"
+	const docs = await vectorStore.similaritySearch(question, 8);
 
+	// Create a chain that connects the "chat" with the "chatPrompt"
+	const chainLLM = new LLMChain({ llm: chat, prompt: chatPrompt });
+
+	// Create a chain that can combine (stuff) the content of all "docs" into one String
+	const chain = new StuffDocumentsChain({ llmChain: chainLLM, inputKey: "inputDocuments" });
+
+	// You could also do loadQAStuffChain(chat, { prompt: chatPrompt });
+	// instead of creating chainLLM and chain manually
+
+	// Calls the chain to
+	// - combine (stuff) the "docs" into one String
+	// - SystemMessage: puts the combined "docs" into the "context" in "chatPrompt"
+	// - HumanMessage: puts the "question" into the "question" in "chatPrompt"
 	const response = await chain.call({
-		query: prompt,
+		inputDocuments: docs,
+		question,
+		history: [],
 	});
 
 	return {
 		text: response.text,
-		sources: response.sourceDocuments.map(doc => doc.metadata.source),
+		sources: docs.map(doc => doc.metadata.source),
 	};
 }
 
@@ -69,8 +91,11 @@ export const formattedResult = (result: any) => {
 	);
 
 	console.log("\nSources:");
-	sources.forEach((source: string, index: number) => {
-		console.log(`${index + 1}. ${source}`);
-	});
+
+	sources
+		.filter((source, index, _sources) => _sources.indexOf(source) === index)
+		.forEach((source: string, index: number) => {
+			console.log(`${index + 1}. ${source}`);
+		});
 };
 

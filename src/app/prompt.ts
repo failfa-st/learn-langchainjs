@@ -6,7 +6,8 @@ import inquirer from "inquirer";
 import autoComplete from "inquirer-autocomplete-prompt";
 import ora from "ora";
 
-import { examplesDirectory } from "../constants.ts";
+import { examplesDirectory, examplesDirectoryRelative } from "../constants.ts";
+
 import { formattedResult, query } from "./query.ts";
 import { updateVectorStore } from "./vectorStore.ts";
 
@@ -62,7 +63,7 @@ const getExamples = async () => {
 	const files = await fs.readdir(examplesDirectory);
 	return files.map(file => ({
 		name: file,
-		value: `./examples/${file}`,
+		value: `${examplesDirectoryRelative}/${file}`,
 	}));
 };
 
