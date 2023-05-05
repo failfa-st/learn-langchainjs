@@ -11,10 +11,11 @@
 
 ## What is langchain?
 
-LangChain is a framework designed to enable applications that work with language models, providing
-modular abstractions for the necessary components. It enables the development of applications that
-utilize language models, regardless of whether they are using the rest of the LangChain framework or
-not.
+LangChain is a framework for developing applications powered by language models. It enables
+applications to be data-aware, connecting language models to other data sources, and agentic,
+allowing language models to interact with their environment. LangChain provides tools for
+integration with your API or backend server. It's ideal for building applications that leverage
+language models for tasks like tabular question answering, summarization, and API interactions. not.
 
 ## How to use this guide?
 
