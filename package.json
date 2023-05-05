@@ -19,6 +19,7 @@
   "type": "module",
   "main": "n.a.",
   "scripts": {
+    "start": "node index.js",
     "prepare": "husky install",
     "spj": "npx sort-package-json",
     "test": "jest",
