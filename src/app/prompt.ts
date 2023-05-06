@@ -8,7 +8,7 @@ import ora from "ora";
 
 import { examplesDirectory, examplesDirectoryRelative } from "../constants.ts";
 
-import { formattedResult, query } from "./query.ts";
+import { formatResult, query } from "./query.ts";
 import { updateVectorStore } from "./vectorStore.ts";
 
 inquirer.registerPrompt("autocomplete", autoComplete);
@@ -22,9 +22,9 @@ export async function prompt() {
 
 const mainMenuPrompt = async () => {
 	const choices = [
+		{ name: "Ask a question", value: "query" },
 		{ name: "Examples", value: "examples" },
 		{ name: "Update VectorStore", value: "update" },
-		{ name: "Ask a question about langchainjs", value: "query" },
 		{ name: "Exit", value: "exit" },
 	];
 
@@ -60,30 +60,31 @@ const examplesMenuPrompt = async () => {
 };
 
 const getExamples = async () => {
-	const files = await fs.readdir(examplesDirectory);
-	return files.map(file => ({
-		name: file,
-		value: `${examplesDirectoryRelative}/${file}`,
-	}));
+	const files = await fs.readdir(examplesDirectory, { withFileTypes: true });
+	return files
+		.filter(file => file.isFile())
+		.map(file => {
+			const { name } = file;
+
+			return {
+				name,
+				value: `${examplesDirectoryRelative}/${name}`,
+			};
+		});
 };
 
 const queryInputPrompt = async () => {
-	while (true) {
-		const { action } = await inquirer.prompt([
-			{
-				type: "input",
-				name: "action",
-				message: "Question (type 'back' to return to main menu):",
-			},
-		]);
+	const { action } = await inquirer.prompt([
+		{
+			type: "editor",
+			name: "action",
+			message: "Question:",
+			waitUserInput: false,
+		},
+	]);
 
-		if (action.toLowerCase() === "back") {
-			return "back";
-		}
-
-		const result = await query(action);
-		formattedResult(result);
-	}
+	const result = await query(action);
+	formatResult(result);
 };
 
 const handleAction = async (action: string) => {
