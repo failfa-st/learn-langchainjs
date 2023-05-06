@@ -1,6 +1,13 @@
 import { JavaScriptTextSplitter } from "./text-splitter/JavaScriptTextSplitter.ts";
 
+/**
+ * Use case: Split code into Documents
+
+ * How to use a custom TextSplitter to split TypeScript code 
+ * into smaller chunks and convert them into Documents. 
+ */
 export async function run() {
+	// Example TypeScript code saved into a template literal
 	const code = `import { NextApiRequest, NextApiResponse } from 'next';
 	import { PrismaClient } from '@prisma/client';
 	
@@ -76,11 +83,20 @@ export async function run() {
 	  }
 	`;
 
+	// Custom TextSplitter that can split code into smaller chunks
 	const splitter = new JavaScriptTextSplitter({
+		// Split the code into chunks of 1000 characters length
 		chunkSize: 1000,
+		// Amount of characters to overlap each code, in this case
+		// 0 = no overlap
+		// I did this because each chunk contains all the code
+		// and overlaps are not needed
 		chunkOverlap: 0,
 	});
 
+	// Split the "code" (also called "Document")
+	// into chunks using the "splitter" and convert them into
+	// Documents (meaning the have "metadata" and "pageContent" afterwards)
 	const output = await splitter.createDocuments([code]);
 
 	console.log(output);
