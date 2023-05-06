@@ -1,7 +1,7 @@
 import chalk from "chalk";
-import { LLMChain, StuffDocumentsChain, VectorDBQAChain } from "langchain/chains";
+import { LLMChain, StuffDocumentsChain } from "langchain/chains";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
-import { OpenAI, OpenAIChat } from "langchain/llms/openai";
+import { OpenAIChat } from "langchain/llms/openai";
 import {
 	ChatPromptTemplate,
 	SystemMessagePromptTemplate,
@@ -64,7 +64,7 @@ You use the following information to answer questions and if you can't do that, 
 	};
 }
 
-export const formattedResult = (result: any) => {
+export const formatResult = (result: any) => {
 	const { text, sources } = result;
 
 	console.log("Text:");
