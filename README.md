@@ -2,19 +2,21 @@
 
 <p align="center"><img src="assets/logo.png" alt="learn langchainjs logo" width="200"/></p>
 
-LangChain for JavaScript / TypeScript developers.
+> LangChain for JavaScript / TypeScript developers.
+
+---
 
 <!-- toc -->
 
 - [Motivation](#motivation)
 - [What is LangChain?](#what-is-langchain)
 - [Getting started](#getting-started)
-  * [Ask a question](#ask-a-question)
+  - [Ask a question](#ask-a-question)
 - [CLI](#cli)
-  * [Ask a question](#ask-a-question-1)
-  * [Examples](#examples)
-  * [Update VectorStore](#update-vectorstore)
-  * [Exit](#exit)
+  - [Ask a question](#ask-a-question-1)
+  - [Examples](#examples)
+  - [Update VectorStore](#update-vectorstore)
+  - [Exit](#exit)
 
 <!-- tocstop -->
 
