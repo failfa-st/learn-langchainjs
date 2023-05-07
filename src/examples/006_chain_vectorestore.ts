@@ -17,7 +17,7 @@ import { vectorStoreLangchainSummary } from "../constants.ts";
  * providing modular abstractions for the necessary components
  */
 export async function run() {
-	const model = new OpenAI({ modelName: "gpt-3.5-turbo", maxRetries: 0, temperature: 0.2 });
+	const model = new OpenAI({ modelName: "gpt-3.5-turbo", temperature: 0.2 });
 
 	const embedding = new OpenAIEmbeddings({
 		modelName: "text-embedding-ada-002",

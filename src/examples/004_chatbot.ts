@@ -9,7 +9,7 @@ import {
 } from "langchain/prompts";
 
 export async function run() {
-	const chat = new ChatOpenAI({ modelName: "gpt-3.5-turbo", maxRetries: 0, temperature: 0.2 });
+	const chat = new ChatOpenAI({ modelName: "gpt-3.5-turbo", temperature: 0.2 });
 
 	const chatPrompt = ChatPromptTemplate.fromPromptMessages([
 		SystemMessagePromptTemplate.fromTemplate("You are a JavaScript developer."),
