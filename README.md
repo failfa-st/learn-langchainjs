@@ -141,5 +141,5 @@ npx ts-node-esm ./src/examples/000_prompt.ts
 
 #### Challenge
 
-- Update the "question" to anything you would like to know and see what the robot is responding
-- What happens if you change the temperature to 1.0?
+- Update the **question** to anything you would like to know and see what the robot is responding
+- Which influence will a temperature of `1.0` have on the answer?
