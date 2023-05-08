@@ -6,18 +6,13 @@
 
 ---
 
-<!-- AUTO-GENERATED-CONTENT:START (TOC) -->
+<!-- AUTO-GENERATED-CONTENT:START (TOC:maxDepth=3) -->
 - [Prerequisites (optional)](#prerequisites-optional)
 - [Introduction](#introduction)
   - [What is LangChain?](#what-is-langchain)
   - [Use Cases](#use-cases)
 - [Main Quest: Help RoboAlex to Talk](#main-quest-help-roboalex-to-talk)
   - [Chapter 1: Answer a simple question](#chapter-1-answer-a-simple-question)
-    - [Components](#components)
-    - [Flowchart](#flowchart)
-    - [Code](#code)
-    - [Run Example](#run-example)
-    - [Challenge](#challenge)
 - [Ask RoboAlex](#ask-roboalex)
 <!-- AUTO-GENERATED-CONTENT:END -->
 
