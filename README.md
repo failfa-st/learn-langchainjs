@@ -29,8 +29,8 @@ Node.js installed and follow these steps:
 2. Install the dependencies by running `npm i`
 3. Make a copy of the `.env.example` file and create a new file named `.env`
    1. Add your `OPENAI_API_KEY` to the `.env` file
-   2. (Optional) Change the `OPENAPI_GPT_MODEL` value to `gpt-4` if you prefer not to use the
-      default `gpt-3.5-turbo` model
+   2. (Optional) Change the `OPENAI_GPT_MODEL` value to `gpt-4` if you prefer not to use the default
+      `gpt-3.5-turbo` model
 
 ---
 
