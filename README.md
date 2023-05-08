@@ -1,147 +1,144 @@
-<h1 align="center"><big>learn langchainjs</big></h1>
+<h1 align="center">learn langchainjs</h1>
 
-<p align="center"><img src="assets/logo.png" alt="learn langchainjs logo" width="200"/></p>
+<p align="center"><img src="assets/00007-766573562.png" alt="learn langchainjs logo" width="200"/></p>
 
-> LangChain for JavaScript / TypeScript developers.
+<p align="center">Getting started with LangChain for JavaScript / TypeScript developers.</p>
 
 ---
 
-<!-- toc -->
+<!-- AUTO-GENERATED-CONTENT:START (TOC) -->
+- [Prerequisites (optional)](#prerequisites-optional)
+- [Introduction](#introduction)
+  - [What is LangChain?](#what-is-langchain)
+  - [Use Cases](#use-cases)
+- [Main Quest: Help RoboAlex to Talk](#main-quest-help-roboalex-to-talk)
+  - [Chapter 1: Answer a simple question](#chapter-1-answer-a-simple-question)
+    - [Components](#components)
+    - [Flowchart](#flowchart)
+    - [Code](#code)
+    - [Run Example](#run-example)
+    - [Challenge](#challenge)
+<!-- AUTO-GENERATED-CONTENT:END -->
 
-- [Motivation](#motivation)
-- [What is LangChain?](#what-is-langchain)
-- [Getting started](#getting-started)
-  - [Ask a question](#ask-a-question)
-- [CLI](#cli)
-  - [Ask a question](#ask-a-question-1)
-  - [Examples](#examples)
-  - [Update VectorStore](#update-vectorstore)
-  - [Exit](#exit)
+---
 
-<!-- tocstop -->
+## Prerequisites (optional)
 
-## Motivation
+If you'd like to run the examples locally or complete all the challenges, you'll need to have
+Node.js installed and follow these steps:
 
-I created some projects using the OpenAI API for GPT directly and wanted to step up my game with a
-library that is used by many others and this is when I found LangChain. When I was exploring how to
-get started with LangChain, I mostly found resources for the Python version of LangChain. As I'm a
-JavaScript / TypeScript developer with no deep experience in Python (I can read and understand it,
-but have not created many projects with it), those examples were not useful to me. Some of these
-examples were also not transferable 1:1 into langchainjs, as both versions don't have the same
-features.
+1. Clone the repository to your computer and navigate to the `learn-langchainjs` folder
+2. Install the dependencies by running `npm i`
+3. Make a copy of the `.env.example` file and create a new file named `.env`
+   1. Add your `OPENAI_API_KEY` to the `.env` file
+   2. (Optional) Change the `OPENAPI_GPT_MODEL` value to `gpt-4` if you prefer not to use the
+      default `gpt-3.5-turbo` model
 
-When trying to get my head around the [documentation](https://js.langchain.com/docs/), the
-[repository](https://github.com/hwchase17/langchainjs) and articles related to LangChain, I had a
-hard time understanding how to do the most "basic" things. What is the purpose of all these
-different building blocks that LangChain provides? The official search in the
-[documentation](https://js.langchain.com/docs/) is using some kind of ChatGPT-style bot, but the
-information there was super outdated when I was using it (April - May 2023). I was very disappointed
-in that because I was expecting this bot to answer all my questions. Since ChatGPT got released I
-got so used to custom explanations about any topic, but as LangChain was released after September
-2021, its data is not part of ChatGPT.
+---
 
-I had a goal: Write a ChatBot using langchainjs, that knows everything about langchainjs, so that I
-can ask questions about langchainjs. This is when I decided to start from scratch, coding one simple
-example at a time, commenting as much as possible and finding use cases for everything I coded.
-While reflecting on each example, I tried to make them as easy to understand as possible. In a way,
-I can explain each line of code to anyone that wants to understand it as well.
+## Introduction
 
-The result is the content of this repository and I hope you can take the bits that make sense to you
-in your journey to learn langchainjs.
+### What is LangChain?
 
-## What is LangChain?
+LangChain is a framework that enables applications to harness language models, allowing them to
+connect with various data sources and interact with their environment. Find more in the official
+[documentation](https://js.langchain.com/docs/) and
+[repository](https://github.com/hwchase17/langchainjs).
 
-LangChain is a framework for developing applications powered by language models. It enables
-applications to be data-aware, connecting language models to other data sources, and agentic,
-allowing language models to interact with their environment. LangChain provides tools for
-integration with your API or backend server. It's ideal for building applications that leverage
-language models for tasks like tabular question answering, summarization, and API interactions.
+It offers a variety of components to choose from:
 
-Check it out:
+- Agent: Makes decisions, interacts with the environment, and repeats actions until task completion.
+- Chain: Combines sequences of calls for complex workflows and applications.
+- Index: Prepares data for interaction with language models through various functionalities.
+- Memory: Persists state between calls, allowing context retention in chains or agents.
+- Model: Integrates with language and chat models for language understanding and generation.
+- Prompt: Handles language model inputs with templates and related functionalities.
+- Schema: Provides interfaces and base classes for library structure and organization.
 
-- [langchainjs documentation](https://js.langchain.com/docs/)
-- [langchainjs repository](https://github.com/hwchase17/langchainjs)
+### Use Cases
 
-## Getting started
+Let's explore some real-world use cases where you could use LangChain:
 
-1. Clone the repository to your computer and go inside the learn-langchainjs folder
-2. Install the dependencies: `npm i`
-3. Copy the `.env.example` and create a `.env` file
-   1. Add your `OPENAI_API_KEY`
-   2. (optional) Change the `OPENAPI_GPT_MODEL` to `gpt-4` if you don't want to use the default
-      `gpt-3.5-turbo`
-4. Start the interactive CLI app: `npm start`
+1. **Sentiment Analysis**: Analyze the mood in user-generated content like reviews or social media
+   posts.
+2. **Text Summarization**: Generate concise summaries of long articles or documents.
+3. **Content Generation**: Create content, such as articles or social media updates, based on user
+   preferences.
+4. **Question-Answering System**: Build a system that accurately answers questions based on a given
+   dataset.
+5. **Chatbot**: Develop a context-aware chatbot that understands and responds to user queries.
 
-> ℹ️ If you have access to `gpt-4`, then you should use it, as the context size is bigger (8k tokens
-> vs 4k), which allows you to ask questions with a lot of content (for example adding code and
-> asking for improving it).
+## Main Quest: Help RoboAlex to Talk
 
-### Ask a question
+<img align="right" src="assets/00007-766573562.png" alt="RoboAlex" width="300"/>
 
-The CLI app can answer questions related to langchainjs, as we use augmented retrieval. This means
-that when you ask a question, we find the relevant data from the langchainjs repo and provide this
-as the context alongside your question when interacting with the OPENAI API.
+Meet RoboAlex, an advanced robot parrot with state-of-the-art features. RoboAlex's body is designed
+to mimic the appearance and movements of a real parrot. However, there's one crucial element
+missing: the brain.
 
-The CLI app provides a ChatGPT-style bot, which uses the actual data from the lanchainjs-repo as the
-context
+Our goal is to give RoboAlex the power of artificial intelligence, enabling it to communicate with
+us and interact with its environment. By helping RoboAlex to talk, we'll bring this extraordinary
+robotic parrot to life, demonstrating the incredible potential of LangChainJS in the process.
 
-Useful if you want to interact with a ChatGPT-style bot to learn everything about langchainjs or
-have a specific question on how a building block is working or have a bug in your code and need it
-to get fixed.
+Bonus: When we are done, RoboAlex will also be able to answer any LangChainJS-related questions for
+us. If you want to check this out directly, please refer to the [RoboAlex CLI](#roboalex-cli)
+section that comes together with this repository.
 
-## CLI
+### Chapter 1: Answer a simple question
 
-### Ask a question
+Our robot should be able to answer a simple **question**, so we have to add a brain, which is
+represented by an LLM (Large Language Model), we call it **model**. In langchainjs we can choose
+from a variety of different models (like OpenAI or Anthropic), but we will not go into depth about
+what the differences are between them.
 
-Opens your default text editor, allowing you to compose a multi-line question. After typing your
-question, save and close the file. The content of the file will be used as your input question.
+#### Components
 
-Under the hood, we employ Retrieval Augmented Generation (RAG) to provide you with the most relevant
-information. To achieve this, we've stored portions of the original langchainjs repository in a
-local [vectorStore](/data/vectorStores/langchainjs-repo/).
+- Model
 
-When you ask a question, the CLI application performs a similarity search against the local
-[vectorStore](/data/vectorStores/langchainjs-repo/). It then selects the most similar documents and
-uses them as the context for the SystemMessage when interacting with OpenAI GPT.
+#### Flowchart
 
-As a result, you receive an answer based on the latest information from the langchainjs repository,
-ensuring an up-to-date and accurate response.
+```mermaid
+flowchart LR
+   question[Question: Can a robot parrot fly?] -->|put into| llm[Model: OpenAI GPT-3.5-turbo] --> |provides| response[Answer: Yes, a robot parrot can talk if it is programmed to do so]
+```
 
-The result is an answer based on the latest information of langchainjs.
+#### Code
 
-### Examples
+<!-- AUTO-GENERATED-CONTENT:START (CODE:src=./src/examples/000_prompt.ts) -->
+<!-- The below code snippet is automatically added from ./src/examples/000_prompt.ts -->
+```ts
+import { config } from "dotenv";
+import { OpenAI } from "langchain/llms/openai";
 
-Allows you to explore and run various code examples from the [/src/examples](/src/examples/)
-directory within the CLI. When you choose this action, you will be presented with a list of
-available examples, dynamically generated based on the files in the [/src/examples](/src/examples/)
-directory.
+// Load environment variables, especially OPENAI_API_KEY
+config();
 
-To run an example, simply select it from the list. The CLI application will execute the chosen
-example, displaying any output or results in the terminal. After running the example, you will be
-returned to the list of available examples, allowing you to choose another one or return to the main
-menu.
+export async function run() {
+	const question = "Can a robot parrot talk?";
 
-This feature provides a convenient way to learn about and experiment with different aspects of the
-langchainjs library. It also showcases the capabilities of the library through practical, hands-on
-examples.
+	// Create a new instance of the OpenAI model
+	// modelName: "gpt-3.5-turbo" - Use the GPT-3.5 Turbo model
+	// temperature: 0.2 - Use a low temperature value for less randomness in the output
+	const model = new OpenAI({ modelName: "gpt-3.5-turbo", temperature: 0.2 });
 
-### Update VectorStore
+	// Use the "model" to ask the "question"
+	// and store the "response" in a variable
+	const response = await model.call(question);
 
-Responsible for filling up the local [vectorStore](/data/vectorStores/langchainjs-repo/) with data.
-When you choose this action, the CLI application will start the updating process.
+	console.log(response);
+}
 
-During the update, the latest information from the langchainjs repository is fetched, and the data
-is transformed into a format suitable for the [vectorStore](/data/vectorStores/langchainjs-repo/).
-Once the update is complete, the CLI application will display a message to inform you that the
-process has successfully finished.
+run();
+```
+<!-- AUTO-GENERATED-CONTENT:END -->
 
-By updating the [vectorStore](/data/vectorStores/langchainjs-repo/), you ensure that the information
-used for answering questions is up-to-date and relevant. This action plays a crucial role in
-maintaining the accuracy and usefulness of the answers provided by the Retrieval Augmented
-Generation (RAG) system in the "Ask a Question" action.
+#### Run Example
 
-### Exit
+```
+npx ts-node-esm ./src/examples/000_prompt.ts
+```
 
-Terminate the CLI application.
+#### Challenge
 
-You can also use CTRL+C to exit.
+- Update the "question" to anything you would like to know and see what the robot is responding
+- What happens if you change the temperature to 1.0?

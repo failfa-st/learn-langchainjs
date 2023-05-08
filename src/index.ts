@@ -1,3 +1,3 @@
-import { prompt } from "./app/prompt.ts";
+import { prompt } from "./cli/prompt.ts";
 
 await prompt();

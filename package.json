@@ -19,6 +19,7 @@
   "type": "module",
   "main": "n.a.",
   "scripts": {
+    "docs": "md-magic --ignore 'node_modules'",
     "start": "node index.js",
     "prepare": "husky install",
     "spj": "npx sort-package-json",
@@ -72,6 +73,7 @@
     "husky": "^8.0.3",
     "jest": "^29.5.0",
     "jest-config": "^29.5.0",
+    "markdown-magic": "^2.6.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },
