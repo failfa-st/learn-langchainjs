@@ -7,18 +7,16 @@
 ---
 
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
+
 - [Prerequisites (optional)](#prerequisites-optional)
 - [Introduction](#introduction)
   - [What is LangChain?](#what-is-langchain)
   - [Use Cases](#use-cases)
 - [Main Quest: Help RoboAlex to Talk](#main-quest-help-roboalex-to-talk)
-  - [Chapter 1: Answer a simple question](#chapter-1-answer-a-simple-question)
-    - [Components](#components)
-    - [Flowchart](#flowchart)
-    - [Code](#code)
-    - [Run Example](#run-example)
-    - [Challenge](#challenge)
-<!-- AUTO-GENERATED-CONTENT:END -->
+  - [Chapter 1: Answer a simple question](#chapter-1-answer-a-simple-question) -
+  [Components](#components) - [Flowchart](#flowchart) - [Code](#code) -
+  [Run Example](#run-example) - [Challenge](#challenge)
+  <!-- AUTO-GENERATED-CONTENT:END -->
 
 ---
 
@@ -47,13 +45,14 @@ connect with various data sources and interact with their environment. Find more
 
 It offers a variety of components to choose from:
 
-- Agent: Makes decisions, interacts with the environment, and repeats actions until task completion.
-- Chain: Combines sequences of calls for complex workflows and applications.
-- Index: Prepares data for interaction with language models through various functionalities.
-- Memory: Persists state between calls, allowing context retention in chains or agents.
-- Model: Integrates with language and chat models for language understanding and generation.
-- Prompt: Handles language model inputs with templates and related functionalities.
-- Schema: Provides interfaces and base classes for library structure and organization.
+- **Model**: Integrates with language and chat models for language understanding and generation
+- **Prompt**: Handles language model inputs with templates and related functionalities
+- **Agent**: Makes decisions, interacts with the environment, and repeats actions until task
+  completion
+- **Chain**: Combines sequences of calls for complex workflows and applications
+- **Index**: Prepares data for interaction with language models through various functionalities
+- **Memory**: Persists state between calls, allowing context retention in chains or agents
+- **Schema**: Provides interfaces and base classes for library structure and organization
 
 ### Use Cases
 
@@ -106,6 +105,7 @@ flowchart LR
 
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./src/examples/000_prompt.ts) -->
 <!-- The below code snippet is automatically added from ./src/examples/000_prompt.ts -->
+
 ```ts
 import { config } from "dotenv";
 import { OpenAI } from "langchain/llms/openai";
@@ -114,22 +114,23 @@ import { OpenAI } from "langchain/llms/openai";
 config();
 
 export async function run() {
-	const question = "Can a robot parrot talk?";
+  const question = "Can a robot parrot talk?";
 
-	// Create a new instance of the OpenAI model
-	// modelName: "gpt-3.5-turbo" - Use the GPT-3.5 Turbo model
-	// temperature: 0.2 - Use a low temperature value for less randomness in the output
-	const model = new OpenAI({ modelName: "gpt-3.5-turbo", temperature: 0.2 });
+  // Create a new instance of the OpenAI model
+  // modelName: "gpt-3.5-turbo" - Use the GPT-3.5 Turbo model
+  // temperature: 0.2 - Use a low temperature value for less randomness in the output
+  const model = new OpenAI({ modelName: "gpt-3.5-turbo", temperature: 0.2 });
 
-	// Use the "model" to ask the "question"
-	// and store the "response" in a variable
-	const response = await model.call(question);
+  // Use the "model" to ask the "question"
+  // and store the "response" in a variable
+  const response = await model.call(question);
 
-	console.log(response);
+  console.log(response);
 }
 
 run();
 ```
+
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 #### Run Example
