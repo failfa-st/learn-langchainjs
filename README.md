@@ -80,7 +80,7 @@ us and interact with its environment. By helping RoboAlex to talk, we'll bring t
 robotic parrot to life, demonstrating the incredible potential of LangChainJS in the process.
 
 Bonus: When we are done, RoboAlex will also be able to answer any LangChainJS-related questions for
-us. If you want to check this out directly, please refer to the [RoboAlex CLI](#roboalex-cli)
+us. If you want to check this out directly, please refer to the [Ask RoboAlex](#ask-roboalex)
 section that comes together with this repository.
 
 ### Chapter 1: Answer a simple question
@@ -143,3 +143,14 @@ npx ts-node-esm ./src/examples/000_prompt.ts
 
 - Update the **question** to anything you would like to know and see what the robot is responding
 - Which influence will a temperature of `1.0` have on the answer?
+
+---
+
+## Ask RoboAlex
+
+To set up and use the CLI to interact with RoboAlex and get answers to LangChainJS-related
+questions, follow the steps in the [Prerequisites (optional)](#prerequisites-optional) section.
+
+Once you've completed the setup, you can start the interactive CLI app by running `npm start`. This
+will enable you to ask RoboAlex questions about LangChainJS and explore its capabilities as you
+progress through the guide.
