@@ -20,7 +20,7 @@
 
 ## Prerequisites (optional)
 
-If you'd like to run the examples locally or complete all the challenges, you'll need to have
+If you'd like to run the examples locally and complete all the challenges, you'll need to have
 Node.js installed and follow these steps:
 
 1. Clone the repository to your computer and navigate to the `learn-langchainjs` folder
@@ -67,7 +67,7 @@ Let's explore some real-world use cases where you could use LangChain:
 
 ## Main Quest: Help RoboAlex to Talk
 
-<img align="right" src="assets/00007-766573562.png" alt="RoboAlex" width="300"/>
+<img align="right" src="assets/00007-766573562.png" alt="RoboAlex" width="200"/>
 
 Meet RoboAlex, an advanced robot parrot with state-of-the-art features. RoboAlex's body is designed
 to mimic the appearance and movements of a real parrot. However, there's one crucial element
@@ -83,7 +83,9 @@ section that comes together with this repository.
 
 ### Chapter 1: Answer a simple question
 
-Our robot should be able to answer a simple **question**, so we have to add a brain, which is
+Our first goal is to enable RoboAlex to answer a simple question. To achieve this, we'll equip RoboAlex with a brain in the form of a Large Language Model (LLM), or model. LangChainJS offers various LLM options, we choose OpenAI's GPT. 
+
+RoboAlex should be able to answer a simple **question**, so we have to add a brain, which is
 represented by an LLM (Large Language Model), we call it **model**. In langchainjs we can choose
 from a variety of different models (like OpenAI or Anthropic), but we will not go into depth about
 what the differences are between them.
@@ -95,7 +97,7 @@ what the differences are between them.
 #### Flowchart
 
 ```mermaid
-flowchart LR
+flowchart TD
    question[Question: Can a robot parrot fly?] -->|put into| llm[Model: OpenAI GPT-3.5-turbo] --> |provides| response[Answer: Yes, a robot parrot can talk if it is programmed to do so]
 ```
 
@@ -135,7 +137,7 @@ run();
 npx ts-node-esm ./src/examples/000_prompt.ts
 ```
 
-#### Challenge
+#### Side Quests
 
 - Update the **question** to anything you would like to know and see what the robot is responding
 - Which influence will a temperature of `1.0` have on the answer?
